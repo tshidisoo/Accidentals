@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Theory Quiz Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>🎵 Music Theory Quiz Game 🎵</h1>
+            <p>Test your knowledge of accidentals, semitones, and tones!</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text">
+                <span id="currentQuestion">1</span> / <span id="totalQuestions">50</span>
+            </div>
+        </div>
+
+        <!-- Score Display -->
+        <div class="score-container">
+            <div class="score-item">
+                <span class="score-label">Score:</span>
+                <span class="score-value" id="score">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">Section:</span>
+                <span class="score-value" id="currentSection">Accidentals</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">Streak:</span>
+                <span class="score-value" id="streak">0</span>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="quiz-section" id="quizSection">
+            <div class="section-header">
+                <h2 id="sectionTitle">Section 1: Accidentals</h2>
+                <div class="section-progress">
+                    <span id="sectionProgress">Question 1 of 10</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-number">
+                    Question <span id="questionNumber">1</span>
+                </div>
+                <div class="question-text" id="questionText">
+                    What symbol is used to raise a note by one semitone?
+                </div>
+                <div class="question-image" id="questionImage" style="display: none;">
+                    <!-- Musical notation or diagrams can go here -->
+                </div>
+            </div>
+
+            <div class="options-container" id="optionsContainer">
+                <button class="option-btn" data-option="0">
+                    <span class="option-letter">A</span>
+                    <span class="option-text">Sharp (♯)</span>
+                </button>
+                <button class="option-btn" data-option="1">
+                    <span class="option-letter">B</span>
+                    <span class="option-text">Flat (♭)</span>
+                </button>
+                <button class="option-btn" data-option="2">
+                    <span class="option-letter">C</span>
+                    <span class="option-text">Natural (♮)</span>
+                </button>
+                <button class="option-btn" data-option="3">
+                    <span class="option-letter">D</span>
+                    <span class="option-text">Double Sharp (𝄪)</span>
+                </button>
+            </div>
+
+            <div class="feedback-container" id="feedbackContainer" style="display: none;">
+                <div class="feedback-message" id="feedbackMessage"></div>
+                <div class="feedback-explanation" id="feedbackExplanation"></div>
+                <button class="prev-btn" id="prevBtn">← Prev Question</button>
+                <button class="skip-btn" id="skipBtn">Skip</button>
+                <button class="next-btn" id="nextBtn">Next Question →</button>
+            </div>
+
+            <div class="hint-container">
+                <button class="hint-btn" id="hintBtn">💡 Get Hint</button>
+                <div class="hint-text" id="hintText" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- Section Complete Screen -->
+        <div class="section-complete" id="sectionComplete" style="display: none;">
+            <div class="complete-icon">🎉</div>
+            <h2>Section Complete!</h2>
+            <div class="section-stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="sectionScore">8</div>
+                    <div class="stat-label">out of 10</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="sectionPercentage">80%</div>
+                    <div class="stat-label">accuracy</div>
+                </div>
+            </div>
+            <div class="section-feedback" id="sectionFeedback">
+                Great job! You have a solid understanding of accidentals.
+            </div>
+            <button class="continue-btn" id="continueBtn">Continue to Next Section</button>
+        </div>
+
+        <!-- Final Results Screen -->
+        <div class="final-results" id="finalResults" style="display: none;">
+            <div class="results-icon">🏆</div>
+            <h2>Quiz Complete!</h2>
+            <div class="final-stats">
+                <div class="final-stat">
+                    <div class="final-stat-number" id="finalScore">42</div>
+                    <div class="final-stat-label">Total Score</div>
+                </div>
+                <div class="final-stat">
+                    <div class="final-stat-number" id="finalPercentage">84%</div>
+                    <div class="final-stat-label">Overall Accuracy</div>
+                </div>
+                <div class="final-stat">
+                    <div class="final-stat-number" id="maxStreak">7</div>
+                    <div class="final-stat-label">Best Streak</div>
+                </div>
+            </div>
+            
+            <div class="section-breakdown">
+                <h3>Section Breakdown:</h3>
+                <div class="breakdown-item">
+                    <span>Accidentals:</span>
+                    <span id="accidentalsResult">8/10 (80%)</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Semitones:</span>
+                    <span id="semitonesResult">9/10 (90%)</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Tones:</span>
+                    <span id="tonesResult">7/10 (70%)</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Enharmonic Equivalents:</span>
+                    <span id="enharmonicResult">8/10 (80%)</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>Mixed Concepts:</span>
+                    <span id="mixedResult">10/10 (100%)</span>
+                </div>
+            </div>
+
+            <div class="final-feedback" id="finalFeedback">
+                Excellent work! You have a strong grasp of music theory fundamentals.
+            </div>
+            
+            <div class="action-buttons">
+                <button class="restart-btn" id="restartBtn">🔄 Restart Quiz</button>
+                <button class="review-btn" id="reviewBtn">📚 Review Mistakes</button>
+            </div>
+        </div>
+
+        <!-- Start Screen -->
+        <div class="start-screen" id="startScreen">
+            <div class="start-content">
+                <h2>Welcome to the Music Theory Quiz!</h2>
+                <p>This quiz covers 5 sections with 10 questions each:</p>
+                <ul class="section-list">
+                    <li>🎼 Section 1: Accidentals (♯, ♭, ♮)</li>
+                    <li>🎹 Section 2: Semitones (Half Steps)</li>
+                    <li>🎵 Section 3: Tones (Whole Steps)</li>
+                    <li>🎶 Section 4: Enharmonic Equivalents</li>
+                    <li>🎸 Section 5: Mixed Concepts</li>
+                </ul>
+                <div class="difficulty-select">
+                    <label for="difficulty">Choose Difficulty:</label>
+                    <select id="difficulty">
+                        <option value="easy">Easy - Basic concepts</option>
+                        <option value="medium" selected>Medium - Standard quiz</option>
+                        <option value="hard">Hard - Advanced questions</option>
+                    </select>
+                </div>
+                <button class="start-btn" id="startBtn">🚀 Start Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
